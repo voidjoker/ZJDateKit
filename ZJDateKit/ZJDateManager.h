@@ -6,6 +6,14 @@
 //  Copyright © 2017年 nero. All rights reserved.
 //
 
+typedef enum {
+    dateUnitDay,
+    dateUnitHour,
+    dateUnitMinute,
+    dateUnitSecond,
+    
+}dateUnit;
+
 #import <Foundation/Foundation.h>
 
 @interface ZJDateManager : NSObject
@@ -35,14 +43,8 @@
 
 -(NSInteger)weekWithDay:(NSDate *)date;
 
--(NSInteger)durationDayFrom:(NSDate *)fromDate to:(NSDate *)toDate;
+-(NSInteger)durationFrom:(NSDate *)fromDate to:(NSDate *)toDate withUnit:(dateUnit )dateUnit;
 
--(NSInteger)durationHourFrom:(NSDate *)fromTime to:(NSDate *)toTime;
-
--(NSInteger)durationMinuteFrom:(NSDate *)fromTime to:(NSDate *)toTime;
-
--(NSDate *)dateFromDate:(NSDate *)date afterDay:(NSInteger)afterDaynumber;
-
--(NSDate *)dateFromDate:(NSDate *)date withInterval:(NSTimeInterval)interval;
+-(NSDate *)dateFromDate:(NSDate *)date after:(NSInteger)afternumber unit:(dateUnit)unit;
 
 @end

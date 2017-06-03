@@ -92,46 +92,52 @@ static ZJDateManager *_manager;
     return comp.weekday;
 }
 
--(NSInteger)durationDayFrom:(NSDate *)fromDate to:(NSDate *)toDate{
+-(NSInteger)durationFrom:(NSDate *)fromDate to:(NSDate *)toDate withUnit:(dateUnit )dateUnit{
     fromDate = [self transformToCHNZoon:fromDate];
     toDate = [self transformToCHNZoon:toDate];
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSTimeInterval interval = [toDate timeIntervalSinceDate:fromDate];
-    return interval/(24*60*60);
+    switch (dateUnit) {
+        case dateUnitDay:
+            return interval/(24*60*60);
+            break;
+        case dateUnitHour:
+            return interval/(60*60);
+            break;
+        case dateUnitMinute:
+            return interval/60;
+            break;
+        case dateUnitSecond:
+            return interval;
+            break;
+        default:
+            return 0;
+            break;
+    }
 }
 
--(NSInteger)durationHourFrom:(NSDate *)fromTime to:(NSDate *)toTime{
-    fromTime = [self transformToCHNZoon:fromTime];
-    toTime = [self transformToCHNZoon:toTime];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSTimeInterval interval = [toTime timeIntervalSinceDate:fromTime];
-    return interval/(60*60);
-}
-
--(NSInteger)durationMinuteFrom:(NSDate *)fromTime to:(NSDate *)toTime{
-    fromTime = [self transformToCHNZoon:fromTime];
-    toTime = [self transformToCHNZoon:toTime];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSTimeInterval interval = [toTime timeIntervalSinceDate:fromTime];
-    return interval/60;
-}
-
--(NSDate *)dateFromDate:(NSDate *)date afterDay:(NSInteger)afterDaynumber {
+-(NSDate *)dateFromDate:(NSDate *)date after:(NSInteger)afternumber unit:(dateUnit)unit {
     date = [self transformToCHNZoon:date];
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSTimeInterval interval = afterDaynumber*24*60*60;
-    NSDate *resultDate = [date dateByAddingTimeInterval:interval];
-    return resultDate;
-}
-
--(NSDate *)dateFromDate:(NSDate *)date withInterval:(NSTimeInterval)interval {
-        date = [self transformToCHNZoon:date];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSTimeInterval interval = 0;
+    switch (unit) {
+        case dateUnitDay:
+            interval = afternumber*24*60*60;
+            break;
+        case dateUnitHour:
+            interval = afternumber*60*60;
+            break;
+        case dateUnitMinute:
+            interval = afternumber*60;
+            break;
+        case dateUnitSecond:
+            interval = afternumber;
+            break;
+        default:
+            break;
+    }
     NSDate *resultDate = [date dateByAddingTimeInterval:interval];
     return resultDate;
 }

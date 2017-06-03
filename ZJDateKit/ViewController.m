@@ -44,16 +44,16 @@
     log(dayStr);
     NSInteger week = [manager weekWithDay:today];
     logInteger(week);
-    NSInteger duration = [manager durationDayFrom:today to:date1];
+    NSInteger duration = [manager durationFrom:today to:date1 withUnit:dateUnitDay];
     logInteger(duration);
-    NSInteger duration2 = [manager durationHourFrom:today to:date1];
-    logInteger(duration2);
-    NSInteger duration3 = [manager durationMinuteFrom:today to:date1];
-    logInteger(duration3);
-    NSDate *afterDay = [manager dateFromDate:today afterDay:2];
-    log(afterDay);
-    NSDate *afterDay2 = [manager dateFromDate:today withInterval:24*60*60];
-    log(afterDay2);
+//    NSInteger duration2 = [manager durationHourFrom:today to:date1];
+//    logInteger(duration2);
+//    NSInteger duration3 = [manager durationMinuteFrom:today to:date1];
+//    logInteger(duration3);
+//    NSDate *afterDay = [manager dateFromDate:today afterDay:2];
+//    log(afterDay);
+//    NSDate *afterDay2 = [manager dateFromDate:today withInterval:24*60*60];
+//    log(afterDay2);
 }
 
 
